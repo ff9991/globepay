@@ -12,7 +12,7 @@ renamed as (
         external_ref as id,
         status,
         ref,
-        date_time,
+        date_time as created_at,
         state,
         cvv_provided,
         amount,
