@@ -31,14 +31,23 @@ Firstly, we reproduce a staging layer where we apply the initial cleaning stage 
 We materialise this layer as views, since we don't need to waste data warehouse storage space on components which are only necessary to update downstream models with the freshest data available.
 As per dbt best practices, every staging model will only have a single source of data.
 
+**Intermediate Layer**
+
+This is where we should be narrowing down the amount of datasets we are pulling data from, finish cleaning up the naming conventions and apply all of the necessary aggregations and functions to obtain the numbers and metrics we'd like to query from at the BI layer in the next step. In our case I believe one Intermediate layer is sufficient to obtain a clean and straighforward final data model immediately after that.
+
+**Marts Layer**
+
+Here is the layer that is going to be surfaced to business stakeholders and it is about showing a clear table (materialised as such for better performance) and making it as simple as possible for less technical stakeholders to be able to derive the insights they have asked for at the beginning of the project.
+
 ## Lineage Graphs
 
+<img width="1304" alt="image" src="https://github.com/ff9991/globepay/assets/73344026/c2e721e9-7ec0-4462-b90d-d4b1e0ef3f60">
 
 
 ## Tips around macros, data validation, and documentation
 Based on the data we have, it is very useful to leverage a macro to convert our amount in different currencies to one currency of reference (usually the primary currency is the one where a company is listed or has its primary market).
 
-Macros would be very useful in this context....
+Macros are very useful in this context, as we have seen to simplify the conversion of the currency values to the usd value in order to have a uniform benchmark in our final layer. However, there would be more options to also simplify further another step when unifying the different subqueries to obtain a unified CTE to have all of the values in the usd currency. 
 
 Another important aspect would be to implement data source freshness through implementing a timestamp to record when the new records are being loaded into our data warehouse. In our solution this is not necessary, as we don't have a constant stream of data coming in. Instead, we have csv files that can be loaded as seeds and then used as sources in our dbt environment. 
 It is crucial to set up the tests to check that the values we are ingesting are in line with what we'd expect.
