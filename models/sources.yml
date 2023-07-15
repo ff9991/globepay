@@ -1,0 +1,9 @@
+version: 2
+
+sources:
+  - name: deel
+    database: starlit-glider-223717  
+    schema: deel  
+    tables:
+      - name: acceptance_report
+      - name: chargeback_report
