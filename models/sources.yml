@@ -1,9 +1,9 @@
 version: 2
 
 sources:
-  - name: deel
-    database: starlit-glider-223717  
-    schema: deel  
+  - name: globepay
+    database: starlit-glider-223717
+    schema: globepay
     tables:
       - name: acceptance_report
       - name: chargeback_report

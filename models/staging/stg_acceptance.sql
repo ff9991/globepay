@@ -2,7 +2,7 @@ with
 
 source as (
 
-    select * from {{ source('deel', 'acceptance_report') }}
+    select * from {{ source('globepay', 'acceptance_report') }}
 
 ),
 
