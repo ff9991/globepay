@@ -2,7 +2,7 @@ with
 
 source as (
 
-    select * from {{ source('deel', 'chargeback_report') }}
+    select * from {{ source('globepay', 'chargeback_report') }}
 
 ),
 
