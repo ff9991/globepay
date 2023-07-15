@@ -55,3 +55,39 @@ It is crucial to set up the tests to check that the values we are ingesting are 
 For what concerns documentation we'd need firstly to clarify our technical and business stakeholders to understand the format in which we can explain the work done through this data modelling project.
 Dbt is great when it comes to describing databases, schemas, tables / sources / models and fields for other technical users to get up to speed quickly and leverage the previous work of other analytics engineers.
 However, we should also bear in mind the necessity to explain the business questions we are trying to answer through certain data transformation processes and aggregations that we are implementing in downstream models.
+
+## Part 2
+
+1. The Acceptance Rate is based on the following SQL query and it could be further aggregated based on the time granularity the business is interested in looking into more closely:
+
+SELECT
+  created_at,
+  COUNT(*) AS total_transactions,
+  SUM(CASE WHEN status = 'ACCEPTED' THEN 1 ELSE 0 END) AS accepted_transactions,
+  SUM(CASE WHEN status = 'ACCEPTED' THEN 1 ELSE 0 END) / COUNT(*) AS acceptance_rate
+FROM
+  payments
+GROUP BY
+  created_at
+ORDER BY
+  created_at;
+
+2. The following query can obtain the list of the countries that had over time declined transactions for over USD 25M:
+SELECT
+  country,
+  SUM(CASE WHEN status = 'DECLINED' THEN amount ELSE 0 END) AS declined_amount
+FROM
+  payments
+GROUP BY
+  country
+HAVING
+  SUM(CASE WHEN status = 'DECLINED' THEN amount ELSE 0 END) > 25000000
+
+3. The following can give a list of all of the payments that have no chargeback and with the same approach we could also achieve a count distinct of these payments and add a date dimension in order to give more insights about percentages between how many payments have chargebacks or not over time and if there are seasonal patterns or outliers in specific circumstances of the year:
+
+SELECT
+  p.*
+FROM
+  payments p
+WHERE
+  chargeback IS NULL; --There is always a 'TRUE' or 'FALSE' value in the source for this data, so we can assume that a NULL value corresponds to a missing value for a payment in our source data.
