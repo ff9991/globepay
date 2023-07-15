@@ -9,16 +9,17 @@ source as (
 renamed as (
 
     select
-        external_ref as id,
+        ref as ref_id,
+        external_ref as external_ref_id,
+        source.source,
         status,
-        ref,
         date_time as created_at,
         state,
         cvv_provided,
         amount,
         country,
         currency,
-        JSON_VALUE(rates.CAD)
+        rates
 
     from source
 
