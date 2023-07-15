@@ -6,4 +6,14 @@ sources:
     schema: globepay
     tables:
       - name: acceptance_report
+        columns:
+          - name: external_ref
+            tests:
+                  - unique
+                  - not_null
       - name: chargeback_report
+        columns:
+          - name: external_ref
+            tests:
+                  - unique
+                  - not_null
