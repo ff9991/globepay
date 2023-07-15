@@ -63,7 +63,7 @@ However, we should also bear in mind the necessity to explain the business quest
 ![image](https://github.com/ff9991/globepay/assets/73344026/334c543d-9226-4254-8a65-961e392ef54e)
 
 
-2. The following query can obtain the list of the countries that had over time declined transactions for over USD 25M:
+2. The following query obtains the list of the countries that had over time declined transactions for over USD 25M:
 
 <img width="582" alt="image" src="https://github.com/ff9991/globepay/assets/73344026/fb1c9024-2b0e-4d5d-86f4-813324fa9f98">
 
