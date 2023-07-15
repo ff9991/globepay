@@ -25,7 +25,8 @@ The few steps I would undertake are the following:
 
 To accomplish this step I have followed the typical dbt best practices and organised into three different steps to process to transform the data and make it useful for further data analysis and unlocking useful insights and recommendations for the business itself.
 
-
+**Staging Layer**
+Firstly, we reproduce a staging layer where we apply the initial cleaning stage for further data modelling in downstream tables and remove unnecessary data that is not adding much value to the project nor enriching the data with more information than what we have like the source field.
 
 ## Lineage Graphs
 
@@ -34,5 +35,9 @@ To accomplish this step I have followed the typical dbt best practices and organ
 ## Tips around macros, data validation, and documentation
 Based on the data we have, it is very useful to leverage a macro to convert our amount in different currencies to one currency of reference (usually the primary currency is the one where a company is listed or has its primary market).
 
-Another important aspect would be to implement data source freshness through implementing a timestamp to record when the new records are being loaded into our data warehouse. In our solution this is not necessary, as we don't have a constant stream of data coming in. Instead, we have csv files that can be loaded as seeds and then used as sources 
+Another important aspect would be to implement data source freshness through implementing a timestamp to record when the new records are being loaded into our data warehouse. In our solution this is not necessary, as we don't have a constant stream of data coming in. Instead, we have csv files that can be loaded as seeds and then used as sources in our dbt environment. 
+It is crucial to set up the tests to check that the values we are ingesting are in line with what we'd expect.
 
+For what concerns documentation we'd need firstly to clarify our technical and business stakeholders to understand the format in which we can explain the work done through this data modelling project.
+Dbt is great when it comes to describing databases, schemas, tables / sources / models and fields for other technical users to get up to speed quickly and leverage the previous work of other analytics engineers.
+However, we should also bear in mind the necessity to explain the business questions we are trying to answer through certain data transformation processes and aggregations that we are implementing in downstream models.
