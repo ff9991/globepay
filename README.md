@@ -26,6 +26,7 @@ The few steps I would undertake are the following:
 To accomplish this step I have followed the typical dbt best practices and organised into three different steps to process to transform the data and make it useful for further data analysis and unlocking useful insights and recommendations for the business itself.
 
 **Staging Layer**
+
 Firstly, we reproduce a staging layer where we apply the initial cleaning stage for further data modelling in downstream tables and remove unnecessary data that is not adding much value to the project nor enriching the data with more information than what we have like the source field.
 
 ## Lineage Graphs
