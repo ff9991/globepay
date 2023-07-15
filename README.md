@@ -22,3 +22,17 @@ The few steps I would undertake are the following:
 8. Identify potential relationships: Look for relationships between variables by exploring correlations, cross-tabulations, or aggregations. This can provide insights into the data and help in formulating further analysis questions based on some occurrences seeming to be more than just random at a first analysis.
 
 ## Summary of your model architecture
+
+To accomplish this step I have followed the typical dbt best practices and organised into three different steps to process to transform the data and make it useful for further data analysis and unlocking useful insights and recommendations for the business itself.
+
+
+
+## Lineage Graphs
+
+
+
+## Tips around macros, data validation, and documentation
+Based on the data we have, it is very useful to leverage a macro to convert our amount in different currencies to one currency of reference (usually the primary currency is the one where a company is listed or has its primary market).
+
+Another important aspect would be to implement data source freshness through implementing a timestamp to record when the new records are being loaded into our data warehouse. In our solution this is not necessary, as we don't have a constant stream of data coming in. Instead, we have csv files that can be loaded as seeds and then used as sources 
+
