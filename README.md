@@ -73,6 +73,7 @@ ORDER BY
   created_at;
 
 2. The following query can obtain the list of the countries that had over time declined transactions for over USD 25M:
+
 SELECT
   country,
   SUM(CASE WHEN status = 'DECLINED' THEN amount ELSE 0 END) AS declined_amount
