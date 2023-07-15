@@ -60,35 +60,15 @@ However, we should also bear in mind the necessity to explain the business quest
 
 1. The Acceptance Rate is based on the following SQL query and it could be further aggregated based on the time granularity the business is interested in looking into more closely:
 
-SELECT
-  created_at,
-  COUNT(*) AS total_transactions,
-  SUM(CASE WHEN status = 'ACCEPTED' THEN 1 ELSE 0 END) AS accepted_transactions,
-  SUM(CASE WHEN status = 'ACCEPTED' THEN 1 ELSE 0 END) / COUNT(*) AS acceptance_rate
-FROM
-  payments
-GROUP BY
-  created_at
-ORDER BY
-  created_at;
+![image](https://github.com/ff9991/globepay/assets/73344026/334c543d-9226-4254-8a65-961e392ef54e)
+
 
 2. The following query can obtain the list of the countries that had over time declined transactions for over USD 25M:
 
-SELECT
-  country,
-  SUM(CASE WHEN status = 'DECLINED' THEN amount ELSE 0 END) AS declined_amount
-FROM
-  payments
-GROUP BY
-  country
-HAVING
-  SUM(CASE WHEN status = 'DECLINED' THEN amount ELSE 0 END) > 25000000
+<img width="582" alt="image" src="https://github.com/ff9991/globepay/assets/73344026/fb1c9024-2b0e-4d5d-86f4-813324fa9f98">
+
 
 3. The following can give a list of all of the payments that have no chargeback and with the same approach we could also achieve a count distinct of these payments and add a date dimension in order to give more insights about percentages between how many payments have chargebacks or not over time and if there are seasonal patterns or outliers in specific circumstances of the year:
 
-SELECT
-  p.*
-FROM
-  payments p
-WHERE
-  chargeback IS NULL; --There is always a 'TRUE' or 'FALSE' value in the source for this data, so we can assume that a NULL value corresponds to a missing value for a payment in our source data.
+<img width="846" alt="image" src="https://github.com/ff9991/globepay/assets/73344026/0c62c781-c75d-400f-ab2b-2befbce9d91a">
+
