@@ -20,16 +20,15 @@ renamed as (
         country,
         currency,
         rates,
-        JSON_EXTRACT_SCALAR(rates,'$.CAD') as cad,
-        JSON_EXTRACT_SCALAR(rates,'$.EUR') as eur,
-        JSON_EXTRACT_SCALAR(rates,'$.MXN') as mxn,
-        JSON_EXTRACT_SCALAR(rates,'$.USD') as usd,
-        JSON_EXTRACT_SCALAR(rates,'$.SGD') as sgd,
-        JSON_EXTRACT_SCALAR(rates,'$.AUD') as aud,
-        JSON_EXTRACT_SCALAR(rates,'$.GBP') as gbp
+        cast(JSON_EXTRACT_SCALAR(rates,'$.CAD')as FLOAT64) as cad,
+        cast(JSON_EXTRACT_SCALAR(rates,'$.EUR')as FLOAT64) as eur,
+        cast(JSON_EXTRACT_SCALAR(rates,'$.MXN')as FLOAT64) as mxn,
+        cast(JSON_EXTRACT_SCALAR(rates,'$.USD')as FLOAT64) as usd,
+        cast(JSON_EXTRACT_SCALAR(rates,'$.SGD')as FLOAT64) as sgd,
+        cast(JSON_EXTRACT_SCALAR(rates,'$.AUD')as FLOAT64) as aud,
+        cast(JSON_EXTRACT_SCALAR(rates,'$.GBP')as FLOAT64) as gbp
 
     from source
-
 )
 
 select * from renamed
