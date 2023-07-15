@@ -28,6 +28,8 @@ To accomplish this step I have followed the typical dbt best practices and organ
 **Staging Layer**
 
 Firstly, we reproduce a staging layer where we apply the initial cleaning stage for further data modelling in downstream tables and remove unnecessary data that is not adding much value to the project nor enriching the data with more information than what we have like the source field.
+We materialise this layer as views, since we don't need to waste data warehouse storage space on components which are only necessary to update downstream models with the freshest data available.
+As per dbt best practices, every staging model will only have a single source of data.
 
 ## Lineage Graphs
 
@@ -35,6 +37,8 @@ Firstly, we reproduce a staging layer where we apply the initial cleaning stage 
 
 ## Tips around macros, data validation, and documentation
 Based on the data we have, it is very useful to leverage a macro to convert our amount in different currencies to one currency of reference (usually the primary currency is the one where a company is listed or has its primary market).
+
+Macros would be very useful in this context....
 
 Another important aspect would be to implement data source freshness through implementing a timestamp to record when the new records are being loaded into our data warehouse. In our solution this is not necessary, as we don't have a constant stream of data coming in. Instead, we have csv files that can be loaded as seeds and then used as sources in our dbt environment. 
 It is crucial to set up the tests to check that the values we are ingesting are in line with what we'd expect.
