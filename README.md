@@ -1,1 +1,3 @@
-# globepay
+# Globepay
+
+## Preliminary Data Exploration
