@@ -9,7 +9,7 @@ source as (
 renamed as (
 
     select
-        external_ref,
+        external_ref as id,
         status,
         source,
         chargeback
