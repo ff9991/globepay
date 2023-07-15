@@ -11,7 +11,6 @@ renamed as (
     select
         external_ref as id,
         status,
-        source,
         ref,
         date_time,
         state,
@@ -19,7 +18,7 @@ renamed as (
         amount,
         country,
         currency,
-        rates
+        JSON_VALUE(rates.CAD)
 
     from source
 
