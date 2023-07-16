@@ -79,7 +79,7 @@ final_with_chargeback as (
     u.*,
     c.chargeback 
     from unified_data u
-    left join {{ ref('stg_chargeback') }} c
+    full outer join {{ ref('stg_chargeback') }} c
     on c.external_ref_id = u.external_ref_id 
 )
 
