@@ -51,12 +51,17 @@ Based on the data we have, it is very useful to leverage a macro to convert our 
 
 Macros are very useful in this context, as we have seen to simplify the conversion of the currency values to the usd value in order to have a uniform benchmark in our final layer. However, there would be more options to also simplify further another step when unifying the different subqueries to obtain a unified CTE to have all of the values in the usd currency. 
 
-Another important aspect would be to implement data source freshness through implementing a timestamp to record when the new records are being loaded into our data warehouse. In our solution this is not necessary, as we don't have a constant stream of data coming in. Instead, we have csv files that can be loaded as seeds and then used as sources in our dbt environment. 
+Another important aspect would be to implement data source freshness tests through implementing a timestamp to record when the new records are being loaded into our data warehouse. In our solution this is not necessary, as we don't have a constant stream of data coming in. Instead, we have csv files that can be loaded as seeds and then used as sources in our dbt environment. 
 It is crucial to set up the tests to check that the values we are ingesting are in line with what we'd expect.
+
+We have also added some basic tests for our source data, but more could be done if we were given more inputs about other business processes and nuances to take into account.
 
 For what concerns documentation we'd need firstly to clarify our technical and business stakeholders to understand the format in which we can explain the work done through this data modelling project.
 Dbt is great when it comes to describing databases, schemas, tables / sources / models and fields for other technical users to get up to speed quickly and leverage the previous work of other analytics engineers.
 However, we should also bear in mind the necessity to explain the business questions we are trying to answer through certain data transformation processes and aggregations that we are implementing in downstream models.
+
+## Next potential steps
+Finally, if I had had more time I would have probably gone into more detail for what concerns the documentation of downstream models and we could have started thinking about some ways of automating the data ingestion and downstream models' refreshes through implementing dbt Jobs or architecting other data orchestration solutions such as Airflow or Prefect.
 
 ## Part 2
 
