@@ -31,14 +31,23 @@ Firstly, we reproduce a staging layer where we apply the initial cleaning stage 
 We materialise this layer as views, since we don't need to waste data warehouse storage space on components which are only necessary to update downstream models with the freshest data available.
 As per dbt best practices, every staging model will only have a single source of data.
 
+**Intermediate Layer**
+
+This is where we should be narrowing down the amount of datasets we are pulling data from, finish cleaning up the naming conventions and apply all of the necessary aggregations and functions to obtain the numbers and metrics we'd like to query from at the BI layer in the next step. In our case I believe one Intermediate layer is sufficient to obtain a clean and straighforward final data model immediately after that.
+
+**Marts Layer**
+
+Here is the layer that is going to be surfaced to business stakeholders and it is about showing a clear table (materialised as such for better performance) and making it as simple as possible for less technical stakeholders to be able to derive the insights they have asked for at the beginning of the project.
+
 ## Lineage Graphs
 
+<img width="1304" alt="image" src="https://github.com/ff9991/globepay/assets/73344026/c2e721e9-7ec0-4462-b90d-d4b1e0ef3f60">
 
 
 ## Tips around macros, data validation, and documentation
 Based on the data we have, it is very useful to leverage a macro to convert our amount in different currencies to one currency of reference (usually the primary currency is the one where a company is listed or has its primary market).
 
-Macros would be very useful in this context....
+Macros are very useful in this context, as we have seen to simplify the conversion of the currency values to the usd value in order to have a uniform benchmark in our final layer. However, there would be more options to also simplify further another step when unifying the different subqueries to obtain a unified CTE to have all of the values in the usd currency. 
 
 Another important aspect would be to implement data source freshness through implementing a timestamp to record when the new records are being loaded into our data warehouse. In our solution this is not necessary, as we don't have a constant stream of data coming in. Instead, we have csv files that can be loaded as seeds and then used as sources in our dbt environment. 
 It is crucial to set up the tests to check that the values we are ingesting are in line with what we'd expect.
@@ -46,3 +55,20 @@ It is crucial to set up the tests to check that the values we are ingesting are 
 For what concerns documentation we'd need firstly to clarify our technical and business stakeholders to understand the format in which we can explain the work done through this data modelling project.
 Dbt is great when it comes to describing databases, schemas, tables / sources / models and fields for other technical users to get up to speed quickly and leverage the previous work of other analytics engineers.
 However, we should also bear in mind the necessity to explain the business questions we are trying to answer through certain data transformation processes and aggregations that we are implementing in downstream models.
+
+## Part 2
+
+1. The Acceptance Rate is based on the following SQL query and it could be further aggregated based on the time granularity the business is interested in looking into more closely:
+
+![image](https://github.com/ff9991/globepay/assets/73344026/334c543d-9226-4254-8a65-961e392ef54e)
+
+
+2. The following query obtains the list of the countries that had over time declined transactions for over USD 25M:
+
+<img width="582" alt="image" src="https://github.com/ff9991/globepay/assets/73344026/fb1c9024-2b0e-4d5d-86f4-813324fa9f98">
+
+
+3. The following can give a list of all of the payments that have no chargeback and with the same approach we could also achieve a count distinct of these payments and add a date dimension in order to give more insights about percentages between how many payments have chargebacks or not over time and if there are seasonal patterns or outliers in specific circumstances of the year:
+
+<img width="846" alt="image" src="https://github.com/ff9991/globepay/assets/73344026/0c62c781-c75d-400f-ab2b-2befbce9d91a">
+
