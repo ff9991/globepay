@@ -40,6 +40,7 @@ This is where we should be narrowing down the amount of datasets we are pulling 
 **Marts Layer**
 
 Here is the layer that is going to be surfaced to business stakeholders and it is about showing a clear table (materialised as such for better performance) and making it as simple as possible for less technical stakeholders to be able to derive the insights they have asked for at the beginning of the project.
+I have decided the Payments model would have been enough to answer all of the initial questions the business has raised and also potential additional questions related to how the business operates and performs.
 
 ## Lineage Graphs
 
