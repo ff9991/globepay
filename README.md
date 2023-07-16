@@ -85,7 +85,7 @@ The following chart shows the countries and the amount of their declined transac
 3. The following can give a list of all of the payments that have no chargeback, which I assume to be corresponding to the 'chargeback' column being 'FALSE'.
 Through the same approach and final table we can count distinct these payments and add a date dimension in order to give more insights about percentages between how many payments have chargebacks or not over time and if there are seasonal patterns or outliers in specific circumstances of the year:
 
-<img width="846" alt="image" src="https://github.com/ff9991/globepay/assets/73344026/0c62c781-c75d-400f-ab2b-2befbce9d91a">
+<img width="907" alt="image" src="https://github.com/ff9991/globepay/assets/73344026/862a337d-12ba-49c7-9330-5f6d9ba4ec0b">
 
 <img width="682" alt="image" src="https://github.com/ff9991/globepay/assets/73344026/155ad7a3-aa2a-455a-bc87-bda7c95343e1">
 
