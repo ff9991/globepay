@@ -20,6 +20,8 @@ The few steps I would undertake are the following:
 7. Visualize the data: Create visualizations such as histograms, bar charts, line charts, or scatter plots to gain a visual understanding of the data distribution, relationships between variables, and any potential outliers or trends that can be already spotted without any further data modelling and to orient the decisions about what to focus on in the next stages of data modelling and analysis.
 
 8. Identify potential relationships: Look for relationships between variables by exploring correlations, cross-tabulations, or aggregations. This can provide insights into the data and help in formulating further analysis questions based on some occurrences seeming to be more than just random at a first analysis.
+   
+10. One other minor thing to be aware of is we have rates for the SGD currency, but we don't have any payment actually happening in that currency.
 
 ## Summary of your model architecture
 
@@ -62,13 +64,24 @@ However, we should also bear in mind the necessity to explain the business quest
 
 ![image](https://github.com/ff9991/globepay/assets/73344026/334c543d-9226-4254-8a65-961e392ef54e)
 
+These are the results in terms of Acceptance Rate at a Monthly-level aggregation:
+
+<img width="673" alt="image" src="https://github.com/ff9991/globepay/assets/73344026/bf3d7c08-cb8b-4036-a9c9-012ac8441927">
+
 
 2. The following query obtains the list of the countries that had over time declined transactions for over USD 25M:
 
 <img width="582" alt="image" src="https://github.com/ff9991/globepay/assets/73344026/fb1c9024-2b0e-4d5d-86f4-813324fa9f98">
 
+The following chart shows the countries and the amount of their declined transactions in USD value:
 
-3. The following can give a list of all of the payments that have no chargeback and with the same approach we could also achieve a count distinct of these payments and add a date dimension in order to give more insights about percentages between how many payments have chargebacks or not over time and if there are seasonal patterns or outliers in specific circumstances of the year:
+<img width="408" alt="image" src="https://github.com/ff9991/globepay/assets/73344026/10d11e07-2ac4-4827-b770-cfbfefc459f6">
+
+3. The following can give a list of all of the payments that have no chargeback, which I assume to be corresponding to the 'chargeback' column being 'FALSE'.
+Through the same approach and final table we can count distinct these payments and add a date dimension in order to give more insights about percentages between how many payments have chargebacks or not over time and if there are seasonal patterns or outliers in specific circumstances of the year:
 
 <img width="846" alt="image" src="https://github.com/ff9991/globepay/assets/73344026/0c62c781-c75d-400f-ab2b-2befbce9d91a">
 
+<img width="682" alt="image" src="https://github.com/ff9991/globepay/assets/73344026/155ad7a3-aa2a-455a-bc87-bda7c95343e1">
+
+An additional consideration could have been to check the percentage of transactions that have no chargeback and base more of the business decisions on this metric, in case there are thresholds considered not healthy for the business itself for example.
